@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="job">
+    <sql id="sqlListAll">
+        SELECT
+			j.*,
+			p.id person_id,
+			p.name person_name
+        FROM
+            job j
+        LEFT JOIN person_job pj ON j.id = pj.job_id
+        LEFT JOIN person p ON p.id = pj.person_id
+    </sql>
+
+    <resultMap id="rmList" type="com.mj.bean.Job">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="duty" column="duty" />
+        <collection property="persons"
+                    ofType="com.mj.bean.Person">
+            <id property="id" column="person_id"/>
+            <result property="name" column="person_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="rmList">
+        <include refid="sqlListAll"/>
+    </select>
+
+    <select id="listByPerson" parameterType="int" resultType="com.mj.bean.Job">
+        SELECT
+	        j.*
+        FROM
+	        job j
+        JOIN
+	        person_job pj
+        ON
+	        j.id = pj.job_id AND pj.person_id = #{personId}
+    </select>
+
+    <select id="get" parameterType="int" resultMap="rmList">
+        <include refid="sqlListAll"/>
+        WHERE j.id = #{id}
+    </select>
+</mapper>

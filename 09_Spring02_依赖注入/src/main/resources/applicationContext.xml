@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--        <bean id="person" class="com.mj.domain.Person"-->
+<!--              p:age="18" p:name="Jack" p:dog-ref="dog"/>-->
+
+<!--        <bean id="dog" class="com.mj.domain.Dog"/>-->
+
+<!--        <bean id="person" class="com.mj.domain.Person">-->
+<!--            <property name="age" value="18"/>-->
+<!--            <property name="name" value="Jack"/>-->
+<!--            <property name="money" value="100.5"/>-->
+<!--            <property name="dog" ref="dog"/>-->
+
+<!--            <property name="nickNames">-->
+<!--                <array>-->
+<!--                    <value>Rose</value>-->
+<!--                    <value>Jim</value>-->
+<!--                    <value>Jake</value>-->
+<!--                </array>-->
+<!--            </property>-->
+<!--        </bean>-->
+
+        <bean id="person" class="com.mj.domain.Person">
+                <constructor-arg value="Jack666" name="name"/>
+                <constructor-arg value="18" name="age"/>
+        </bean>
+</beans>

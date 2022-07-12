@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idCard">
+    <sql id="sqlListAll">
+        SELECT
+            ic.id,
+		    ic.no,
+		    ic.address,
+		    p.id person_id,
+            p.name person_name
+        FROM
+            id_card ic
+        JOIN person p ON p.id = ic.person_id
+    </sql>
+
+    <resultMap id="rmList" type="com.mj.bean.IdCard">
+        <id property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="address" column="address"/>
+        <association property="person"
+                     javaType="com.mj.bean.Person">
+            <id property="id" column="person_id"/>
+            <result property="name" column="person_name"/>
+        </association>
+    </resultMap>
+
+    <select id="list" resultMap="rmList">
+        <include refid="sqlListAll"/>
+    </select>
+
+    <select id="get" parameterType="int" resultMap="rmList">
+        <include refid="sqlListAll"/>
+        WHERE ic.id = #{id}
+    </select>
+</mapper>

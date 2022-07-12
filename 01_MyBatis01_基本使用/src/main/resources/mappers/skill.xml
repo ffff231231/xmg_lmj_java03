@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="skill">
+    <sql id="sqlListAll">
+        SELECT * FROM skill
+    </sql>
+
+    <select id="list" resultType="Skill">
+        <include refid="sqlListAll" />
+    </select>
+
+    <select id="list2" parameterType="sKill" resultType="skiLL">
+        <include refid="sqlListAll" /> WHERE id > #{id} OR level > #{level} OR name LIKE #{name}
+    </select>
+
+    <select id="list3" parameterType="String" resultType="com.mj.bean.Skill">
+        <include refid="sqlListAll" /> WHERE name LIKE #{name}
+    </select>
+
+    <select id="get" parameterType="int" resultType="com.mj.bean.Skill">
+        <include refid="sqlListAll" /> WHERE id = #{id}
+    </select>
+
+    <select id="dynamicSQL" parameterType="Map" resultType="com.mj.bean.Skill">
+        <include refid="sqlListAll" /> WHERE 1 = 1
+        <if test="id != null">
+            AND id > #{id}
+        </if>
+
+        <if test="name != null">
+            AND name LIKE #{name}
+        </if>
+
+        <if test="level != null">
+            AND level &lt; #{level}
+        </if>
+    </select>
+
+    <select id="dynamicSQL2" parameterType="Map" resultType="com.mj.bean.Skill">
+        <include refid="sqlListAll" />
+        <where>
+            <if test="id != null">
+                AND id > #{id}
+            </if>
+
+            <if test="name != null">
+                AND name LIKE #{name}
+            </if>
+
+            <if test="level != null">
+                AND level &lt; #{level}
+            </if>
+        </where>
+    </select>
+
+<!--<    <resultMap id="rmSkill" type="com.mj.bean.Skill">-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="id" column="id" />-->
+<!--        <result property="createdTime" column="created_time" />-->
+<!--        <result property="name" column="name" />-->
+<!--        <result property="level" column="level" />-->
+<!--    </resultMap>>-->
+
+<!--    <select id="list" resultMap="rmSkill">-->
+<!--        SELECT * FROM skill-->
+<!--    </select>-->
+
+    <insert id="insert" parameterType="com.mj.bean.Skill">
+        INSERT INTO skill(name, level) VALUES(#{name}, #{level})
+    </insert>
+
+    <insert id="insert2" parameterType="com.mj.bean.Skill">
+        INSERT INTO skill(name, level) VALUES(#{name}, #{level})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="insert3"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            parameterType="com.mj.bean.Skill">
+        INSERT INTO skill(name, level) VALUES(#{name}, #{level})
+    </insert>
+
+    <update id="update" parameterType="com.mj.bean.Skill">
+        UPDATE skill SET name = #{name}, level = #{level} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM skill WHERE id = #{id}
+    </delete>
+
+    <insert id="batchInsert"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            parameterType="List">
+        INSERT INTO skill(name, level) VALUES
+        <foreach collection="list" item="skill" separator=",">
+            (#{skill.name}, #{skill.level})
+        </foreach>
+    </insert>
+
+    <delete id="batchDelete" parameterType="List">
+        DELETE FROM skill WHERE id IN (
+        <foreach collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <delete id="batchDelete2" parameterType="List">
+        DELETE FROM skill WHERE id IN
+        <foreach collection="array"
+                 item="id"
+                 open="("
+                 close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

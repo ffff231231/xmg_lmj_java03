@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="experience">
+    <select id="list" resultType="java.util.LinkedHashMap">
+        SELECT
+            t1.*,
+            t2.id `company.id`,
+            t2.name `company.name`
+        FROM
+            experience t1
+        JOIN company t2 ON t1.company_id = t2.id
+    </select>
+
+<!--    <select id="list" resultType="com.mj.bean.Experience">-->
+<!--        SELECT-->
+<!--            t1.*,-->
+<!--            t2.id `company.id`,-->
+<!--            t2.name `company.name`-->
+<!--        FROM-->
+<!--            experience t1-->
+<!--        JOIN company t2 ON t1.company_id = t2.id-->
+<!--    </select>-->
+
+<!--    <resultMap id="rmExperience" type="com.mj.bean.Experience">-->
+<!--        <result property="company.id" column="t2_id" />-->
+<!--        <result property="company.name" column="t2_name" />-->
+<!--    </resultMap>-->
+
+<!--    <select id="list" resultMap="rmExperience">-->
+<!--        SELECT-->
+<!--            t1.*,-->
+<!--            t2.id t2_id,-->
+<!--            t2.name t2_name-->
+<!--        FROM-->
+<!--            experience t1-->
+<!--        JOIN company t2 ON t1.company_id = t2.id-->
+<!--    </select>-->
+
+<!--    <select id="list" resultType="com.mj.bean.Experience">-->
+<!--        SELECT-->
+<!--            t1.*, t2.*-->
+<!--        FROM-->
+<!--            experience t1-->
+<!--        JOIN company t2 ON t1.company_id = t2.id-->
+<!--    </select>-->
+</mapper>

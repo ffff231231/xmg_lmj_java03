@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="job">
+    <!-- readonly 默认是 false -->
+    <cache readOnly="false"/>
+    <!-- <cache readOnly="false"/> -->
+
+
+    <sql id="sqlListAll">
+        SELECT * FROM job
+    </sql>
+
+    <select id="list" resultType="com.mj.bean.Job">
+        <include refid="sqlListAll"/>
+    </select>
+
+    <select id="get" parameterType="int" resultType="com.mj.bean.Job">
+        <include refid="sqlListAll"/>
+        WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.mj.bean.Job">
+        UPDATE job SET name = #{name}, duty = #{duty} WHERE id = #{id}
+    </update>
+</mapper>

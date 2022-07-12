@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.SkillDao">
+    <sql id="sqlList">
+        SELECT * FROM skill
+    </sql>
+
+    <resultMap id="rmGet" type="Skill">
+        <constructor>
+            <!-- 用javaType的话，顺序不可以颠倒（即javaType必须按想用构造方法的顺序来） -->
+            <arg column="name" javaType="String" />
+            <arg column="level" javaType="Integer" />
+
+            <!-- 用@Param + name的话，顺序可以颠倒（即name可以无序） -->
+<!--            <arg column="name" name="name"/>-->
+<!--            <arg column="level" name="level"/>-->
+        </constructor>
+    </resultMap>
+
+    <select id="get" parameterType="int" resultMap="rmGet">
+        <include refid="sqlList"/> WHERE id = #{id}
+    </select>
+
+    <select id="list" resultType="Skill">
+        <include refid="sqlList"/>
+    </select>
+
+    <update id="update" parameterType="Skill">
+        UPDATE skill SET name = #{name}, level = #{level} WHERE id = #{id}
+    </update>
+
+    <insert id="save"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            parameterType="Skill">
+        INSERT INTO skill(name, level) VALUES(#{name}, #{level})
+    </insert>
+
+    <delete id="remove" parameterType="int">
+        DELETE FROM skill WHERE id = #{id}
+    </delete>
+</mapper>
