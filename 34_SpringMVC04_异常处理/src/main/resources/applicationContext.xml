@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.mj"/>
+
+    <!-- 保证@Controller能够正常使用 -->
+    <mvc:annotation-driven/>
+
+    <!-- DispatcherServlet不想处理的请求都交回给默认Servlet去处理 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 异常处理 -->
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+<!--        &lt;!&ndash; 出现异常时，转发到对应的页面 &ndash;&gt;-->
+<!--        <property name="exceptionMappings">-->
+<!--            <props>-->
+<!--                <prop key="java.lang.ArithmeticException">/WEB-INF/page/error/runtime.jsp</prop>-->
+<!--                <prop key="java.io.IOException">/WEB-INF/page/error/io.jsp</prop>-->
+<!--                <prop key="java.lang.ClassNotFoundException">/WEB-INF/page/error/not.jsp</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+
+<!--        &lt;!&ndash; 异常对象的属性名（可以通过EL表达式访问） &ndash;&gt;-->
+<!--        <property name="exceptionAttribute" value="ex"/>-->
+
+<!--        &lt;!&ndash; 其他异常统一转发的页面 &ndash;&gt;-->
+<!--        <property name="defaultErrorView" value="/WEB-INF/page/error/default.jsp"/>-->
+<!--    </bean>-->
+</beans>

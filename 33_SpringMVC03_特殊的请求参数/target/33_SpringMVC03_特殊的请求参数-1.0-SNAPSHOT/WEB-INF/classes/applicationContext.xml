@@ -7,7 +7,7 @@
 
     <context:component-scan base-package="com.mj"/>
 
-    <mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <!-- 影响返回值是String的内容 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -29,4 +29,17 @@
 
     <mvc:default-servlet-handler/>
 
+    <!-- 解析Multipart参数 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- 类型转换器 -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.mj.converter.DateConverter"/>
+            </set>
+        </property>
+    </bean>
 </beans>
