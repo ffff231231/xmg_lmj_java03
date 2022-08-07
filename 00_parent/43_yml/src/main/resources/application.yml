@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /yml
+
+cat:
+  id: 11
+  name: Miao
+
+student:
+  id: 1111
+  age: 2
+  name: mj666
+  nick-names:
+    - zhangsan
+    - lisi
+    - wangwu
+  dog:
+    age: 20
+    name: larry
+  dogs:
+    - age: 11
+      name: abc
+    - age: 22
+      name: def

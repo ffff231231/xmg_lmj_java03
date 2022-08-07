@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /yml
+
+name: "m\nj"
+
+person:
+  id: 111
+  age: 222
+  name: mj_${person.dog.age}
+  nick-names:
+    - zhangsan
+    - lisi
+    - wangwu
+  dog:
+    age: 20
+    name: larry
+  dogs:
+    - age: 11
+      name: abc_${person.dog.name}
+    - age: 22
+      name: def_${server.port}

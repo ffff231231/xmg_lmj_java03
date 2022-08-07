@@ -1,0 +1,4 @@
+jdbc:
+  url: jdbc:mysql://200.0.0.10:3306/shop
+  username: root2
+  password: jdh2

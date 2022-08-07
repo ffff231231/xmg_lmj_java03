@@ -1,0 +1,10 @@
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+server:
+  servlet:
+    jsp:
+      init-parameters:
+        - developement: true
